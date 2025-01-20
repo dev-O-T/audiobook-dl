@@ -70,7 +70,7 @@ information page**
 
 **Storytel**
 ```shell
-audiobook-dl --username <username> --password <password> <url>
+audiobook-dl --username <username> --password <password> --library Storytel <url>
 ```
 
 ## Arguments
