@@ -2,7 +2,7 @@ import importlib.resources
 from typing import Sequence
 import shutil
 from urllib3.poolmanager import PoolManager
-from requests.adapters import HTTPAdapter
+from curl_cffi.requests.adapters import HTTPAdapter
 from ssl import SSLContext
 
 def levenstein_distance(a: str, b: str) -> int:
