@@ -184,7 +184,7 @@ def download_file(args: Tuple[Audiobook, str, int, Any]) -> str:
         logging.debug(f"expected_content_type not set by source, content-type is {content_type}, please update the source implementation")
     # Download file to tmp file
     with open(filepath_tmp, "wb") as f:
-        for chunk in request.iter_content(chunk_size=1024):
+        for chunk in request.iter_content():
             f.write(chunk)
             download_progress = len(chunk)/total_filesize
             update_progress(download_progress)
