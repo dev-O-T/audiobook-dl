@@ -1,3 +1,5 @@
+# Note: This is a fork from jo1gi's repo!
+
 # audiobook-dl
 ![GitHub release](https://img.shields.io/github/v/release/jo1gi/audiobook-dl)
 ![GitHub top language](https://img.shields.io/github/languages/top/jo1gi/audiobook-dl)
@@ -33,11 +35,11 @@ pip install audiobook-dl
 
 If you want to use the newest version (can be unstable) run:
 ```shell
-pip install "git+https://github.com/jo1gi/audiobook-dl.git"
+pip install "git+https://github.com/dev-O-T/audiobook-dl.git"
 ```
 or
 ```shell
-git clone https://github.com/jo1gi/audiobook-dl.git
+git clone https://github.com/dev-O-T/audiobook-dl.git
 cd audiobook-dl
 python3 setup.py install
 ```
