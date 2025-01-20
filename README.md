@@ -28,11 +28,6 @@ audiobook-dl currently supports downloading from the following sources:
 ## Installation
 audiobook-dl can be installed from the repo itself or through pip.
 
-To get the newest stable version with pip run:
-```shell
-pip install audiobook-dl
-```
-
 If you want to use the newest version (can be unstable) run:
 ```shell
 pip install "git+https://github.com/dev-O-T/audiobook-dl.git"
