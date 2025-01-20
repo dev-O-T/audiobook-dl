@@ -12,5 +12,5 @@
 | Overdrive        |    ✓    |         ✗         |                                                                                                |
 | Podimo           |    ✗    |         ✓         |                                                                                                |
 | Saxo             |    ✗    |         ✓         |                                                                                                |
-| Storytel         |    ✗    |         ✓         | Books have to be in your bookshelf                                                             |
+| Storytel         |    ✗    |         ✓         | Books does not have to be in your bookshelf                                                             |
 | YourCloudLibrary |    ✓    |         ✓         |                                                                                                |
