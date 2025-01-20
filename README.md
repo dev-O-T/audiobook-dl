@@ -68,6 +68,11 @@ audiobook-dl -c <cookie file> <url>
 **Most sites require you to provide the listening page not not just the
 information page**
 
+**Storytel**
+```shell
+audiobook-dl --username <username> --password <password> <url>
+```
+
 ## Arguments
 
 | Argument          | Value                                                             |
