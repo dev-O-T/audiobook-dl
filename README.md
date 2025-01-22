@@ -125,23 +125,3 @@ Cookie files can be specified in a similar way:
 cookie_file = "./everand_cookies.txt"
 ```
 Paths are relative to the configuration directory.
-
-## Contributions
-Issues, bug-reports, pull requests or ideas for features and improvements are
-**very welcome**.
-
-## Donations
-If you like the project, please consider donating:
-- [Ko-fi](https://ko-fi.com/jo1gi)
-- [Buy me a Coffee](https://www.buymeacoffee.com/joakimholm)
-<details>
-<summary>Cryptocurrencies</summary>
-
-- Bitcoin: bc1qrh8hcnw0fd22y7rmljlmrztwrz2nd5tqckrt44
-- Bitcoin Cash: qp6rt9zx7tfyu9e4alxcn5yf4re5pfztvu8yx0rywh
-- Dash: XfgopGkj4BBpuzsUvrbj9jenXUZ6dXsr3J
-- Etherium: 0x8f5d2eb6d2a4d4615d2b9b1cfa28b4c5b9d18f9f
-- Litecoin: ltc1qfz2936a04m2h7t0srxftygjrq759auav7ndfd3
-- Monero: 853tLAbK5wQ93mdj884C31JGKBUEJCpM25gEjGGLnuVDc8PEDMJi6uC5Vcz9g37K2PeT8FY1bjEveUWqJXNPotFRLwLnn9a
-
-</details>
