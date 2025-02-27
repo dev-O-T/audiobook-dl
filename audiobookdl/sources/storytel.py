@@ -31,6 +31,7 @@ import json
 import re
 import os
 import uuid
+import time
 
 # fmt: off
 metadata_corrections: Dict[str, Dict[str, Any]] = {
@@ -106,6 +107,8 @@ class StorytelSource(Source):
 
     def __init__(self, options) -> None:
         super().__init__(options)
+        self.ebook = options.ebook
+
         self.database_directory_books = os.path.join(self.database_directory, "books")
         self.database_directory_playback_metadata = os.path.join(
             self.database_directory, "playback-metadata"
@@ -170,25 +173,19 @@ class StorytelSource(Source):
         self._do_login()
 
     def _do_login(self) -> None:
-        # Generate a new UUID for each request
         generated_device_id = str(uuid.uuid4())
-
         resp = self._session.post(
-            f"https://www.storytel.com/api/login.action?m=1&token=guestsv&userid=-1&version=24.52"
-            f"&terminal=android&locale=sv&deviceId={generated_device_id}&kidsMode=false",
-
+            f"https://www.storytel.com/api/login.action?m=1&token=guestsv&userid=-1&version=24.22&terminal=android&locale=sv&deviceId={generated_device_id}&kidsMode=false",
             data={
                 "uid": self._username,
                 "pwd": self._password,
             },
             headers={"content-type": "application/x-www-form-urlencoded"},
         )
-
         if resp.status_code != 200:
             if resp.status_code == 403:
                 self.check_cloudflare_blocked(resp)
             raise UserNotAuthorized
-
         user_data = resp.json()
         jwt = user_data["accountInfo"]["jwt"]
         self._language = user_data["accountInfo"]["lang"]
@@ -201,7 +198,9 @@ class StorytelSource(Source):
         """
         if self._download_counter > 0 and self._download_counter % 10 == 0:
             logging.debug("refreshing login")
+            time.sleep(0.5)
             self._do_login()
+            time.sleep(0.5)
 
     @staticmethod
     def _clean_share_url(url: str) -> str:
@@ -242,7 +241,7 @@ class StorytelSource(Source):
         books: List[Union[BookId[str], Audiobook]] = []
         for item in list_details["items"]:
             abook_formats = [
-                format for format in item["formats"] if format["type"] == "abook"
+                format for format in item["formats"] if format["type"] == ("ebook" if self.ebook is not None else "abook")
             ]
             if (
                 len(abook_formats) > 0
@@ -426,8 +425,9 @@ class StorytelSource(Source):
 
         Get the final Audio URL by sending a requests to the assets API and return the redirect location.
         """
+        consumable_type = "ebook" if self.ebook is not None else "abook"
         resp = self._session.get(
-            f"https://api.storytel.net/assets/v2/consumables/{consumableId}/abook",
+            f"https://api.storytel.net/assets/v2/consumables/{consumableId}/{consumable_type}",
             allow_redirects=False,
         )
         self._download_counter += 1
@@ -446,9 +446,9 @@ class StorytelSource(Source):
             AudiobookFile(
                 url=audio_url,
                 headers=self._session.headers,
-                ext="mp3",
+                ext="epub" if self.ebook is not None else "mp3",
                 expected_status_code=200,
-                expected_content_type="audio/mpeg",
+                expected_content_type="application/epub+zip" if self.ebook is not None else "audio/mpeg",
             )
         ]
 
@@ -483,8 +483,10 @@ class StorytelSource(Source):
         if not "formats" in book_details:
             raise DataNotPresent
         abook_formats = [f for f in book_details["formats"] if f["type"] == "abook"]
+        ebook_formats = [f for f in book_details["formats"] if f["type"] == "ebook"]
         if len(abook_formats) == 0:
-            raise BookHasNoAudiobook
+            if len(ebook_formats) == 0:
+                raise BookHasNoAudiobook
         elif len(abook_formats) != 1:
             raise GenericAudiobookDLException(
                 "multiple abook formats",
@@ -519,6 +521,8 @@ class StorytelSource(Source):
             raise DataNotPresent
         for format in playback_metadata["formats"]:
             if format["type"] == "abook":
+                return format
+            if format["type"] == "ebook":
                 return format
         raise DataNotPresent
 
