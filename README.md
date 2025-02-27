@@ -88,10 +88,11 @@ audiobook-dl --username <username> --password <password> --library Storytel <url
 | --remove-chars    | List of characters that will be removed from output path          |
 | --no-chapters     | Don't include chapters in output file                             |
 | --output-format   | Output file format                                                |
-| --verbose-ffmpeg | Show ffmpeg output in terminal                                    |
+| --verbose-ffmpeg | Show ffmpeg output in terminal                                     |
 | --username        | Username to source (Required when using login)                    |
 | --password        | Password to source (Required when using login)                    |
 | --library         | Specific library on service (Sometimes required when using login) |
+| --ebook 1         | Storytel ebook download                                           |
 
 ## Output
 By default, audiobook-dl saves all audiobooks to `{title}` relative to the
