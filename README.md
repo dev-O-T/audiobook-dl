@@ -3,6 +3,8 @@ Tested only with Storytel. Others can be broken.
 ## Differences to jo1gi's repo:
 - Migrated from requests to curl_cffi to workaround CloudFlare block with Storytel
 - Updated UserAgent string
+- Added ebook support for storytel
+- - use parameter --ebook 1
 
 # audiobook-dl
 ![GitHub release](https://img.shields.io/github/v/release/jo1gi/audiobook-dl)
