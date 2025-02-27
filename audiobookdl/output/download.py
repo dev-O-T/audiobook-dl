@@ -82,7 +82,7 @@ def add_metadata_to_file(audiobook: Audiobook, filepath: str, options):
         with open(f"{filepath}.json", "w") as f:
             f.write(audiobook.metadata.as_json())
     # Chapters
-    if audiobook.chapters and not options.no_chapters:
+    if audiobook.chapters and not options.no_chapters and not options.ebook:
         logging.book_update("Adding chapters")
         metadata.add_chapters(filepath, audiobook.chapters)
     # Cover
